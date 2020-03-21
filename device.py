@@ -55,6 +55,10 @@ class CubeDevice(object):
         self._write_pins(self.green_pins, 0)
         self._write_pins(self.red_pins, 1)
 
+    def go_off(self):
+        self._write_pins(self.green_pins, 0)
+        self._write_pins(self.red_pins, 0)
+
     def blink(self):
         for i in range(5):
             self.go_red()
@@ -70,5 +74,4 @@ class CubeDevice(object):
     def disconnect(self):
         if not self.board:
             return
-        self._write_pins(self.red_pins, 0)
-        self._write_pins(self.green_pins, 0)
+        self.go_off()
