@@ -3,7 +3,8 @@
 import wx
 import imaplib
 import socket
-import urllib2
+import urllib.request
+import urllib.error
 import json
 import threading
 import logging
@@ -144,14 +145,14 @@ class SlackMode(ImapMode):
         history_url = self.get_url('%s.history' % uri_part)
         url = '%s&channel=%s&unreads=True' % (history_url, item_id)
         try:
-            history = json.loads(urllib2.urlopen(url).read())
+            history = json.loads(urllib.request.urlopen(url).read())
             self.UNREADS.append(history['unread_count_display'])
-        except urllib2.URLError, e:
+        except urllib.error.URLError as e:
             self.error(e)
 
     def get_unreads(self, uri, key):
         url = self.get_url(uri)
-        resp = json.loads(urllib2.urlopen(url).read())
+        resp = json.loads(urllib.request.urlopen(url).read())
         if 'error' in resp:
             self.error(str(resp['error']))
 

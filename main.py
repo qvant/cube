@@ -3,6 +3,7 @@
 import platform
 import threading
 import wx
+import wx.adv
 import modes
 import icons
 
@@ -27,11 +28,11 @@ class CubeApp(wx.App):
 
 #==============================================================================
 
-class TaskBarIcon(wx.TaskBarIcon):
+class TaskBarIcon(wx.adv.TaskBarIcon):
     def __init__(self):
         super(TaskBarIcon, self).__init__()
         self.SetupIcon()
-        self.Bind(wx.EVT_TASKBAR_LEFT_DOWN, self.OnLeftClick)
+        self.Bind(wx.adv.EVT_TASKBAR_LEFT_DOWN, self.OnLeftClick)
 
     def CreatePopupMenu(self):
         menu = wx.Menu()

@@ -24,7 +24,7 @@ class CubeDevice(object):
             return list(self._discover_posix(['/dev/ttyACM*', '/dev/ttyUSB*']))
 
     def _discover_windows(self):
-        import _winreg as winreg
+        import winreg as winreg
         path = r'HARDWARE\DEVICEMAP\SERIALCOMM'
         try:
             key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, path)
@@ -56,7 +56,7 @@ class CubeDevice(object):
         self._write_pins(self.red_pins, 1)
 
     def blink(self):
-        for i in xrange(5):
+        for i in range(5):
             self.go_red()
             sleep(0.1)
             self.go_green()
